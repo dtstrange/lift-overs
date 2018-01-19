@@ -7,6 +7,7 @@ var db = require("../models");
 
 //path for main page
 router.get("/", function(req, res){
+<<<<<<< HEAD
     res.render("index")
 });
 
@@ -20,3 +21,10 @@ module.exports = router;
 
 
 
+=======
+    res.send("index")
+});
+
+
+module.exports = router;
+>>>>>>> cee3df07bb58c69a34116d5acc4338bef4e01af5

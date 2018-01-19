@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "bulma": "^0.6.2",
     "express": "^4.16.2",
     "express-handlebars": "^3.0.0",
     "sequelize": "^4.31.1"

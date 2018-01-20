@@ -12,9 +12,18 @@ module.exports = function(app) {
     });
 
     //path for registration
-    router.get("/register", function(req, res){
-        res.render("register")
-    });   
+    router.get("/register/driver", function(req, res){
+        res.render("driver")
+    });
+
+    //path for oganization
+    router.get("/register/org", function(req, res){
+        res.render("org")
+    });
+    //path for user settings
+    router.get("/register/settings", function(req, res){
+        res.render("settings")
+    });        
 
 
 };

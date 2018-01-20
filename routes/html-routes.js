@@ -16,12 +16,12 @@ module.exports = function(app) {
         res.render("driver")
     });
 
-    //path for oganization
+    //path for oganization info
     router.get("/register/org", function(req, res){
         res.render("org")
     });
     //path for user settings
-    router.get("/register/settings", function(req, res){
+    router.get("/user/settings", function(req, res){
         res.render("settings")
     });        
 

@@ -1,7 +1,7 @@
 var db = require("../models");
 
 module.exports = function (app) {
-    app.get("/api/all", function (req, res) {
+    app.get("/api/user/all", function (req, res) {
         db.User.findAll({}).then(function (results) {
             res.json(results);
         }).catch(function (err) {
@@ -10,7 +10,7 @@ module.exports = function (app) {
     });
 
     //route to create user
-    app.post("/api/create/user", function (req, res) {
+    app.post("/api/user/create/", function (req, res) {
         db.User.create({
             user_first_name: req.body.first_name,
             user_last_name: req.body.last_name,
@@ -25,7 +25,7 @@ module.exports = function (app) {
     });
 
     //route to update user into
-    app.put("/api/update/user/:id", function (req, res) {
+    app.put("/api/user/update/:id", function (req, res) {
         db.User.update({
             user_first_name: req.body.first_name,
             user_last_name: req.body.last_name,

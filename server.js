@@ -18,9 +18,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 //contoller for routes
-var routes = require("./routes");
+var routes = require("./routes/html-routes.js");
+var driveApi = require("./driver-api-routes.js");
+var userApi = require("./user-api-routes.js");
+var orgApi = require("./orginazation-api-routes.js");
 
 app.use("/", routes);
+app.use("/api/driver", driveApi);
+app.use("/api/user", userApi);
+app.use("/api/org", orgApi);
 
 //app.listen(PORT);
 

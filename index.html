@@ -1,73 +1,93 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>Lift Overs</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css" />
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Lify-overs</title>
+     <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+   <!-- CSS syle sheet -->
+   <link rel="stylesheet" type="text/css" href="style.css">
+
 </head>
-
 <body>
-    <div class="tabs">
-        <ul>
-            <li class="is-active"><a>Home</a></li>
-            <li><a>About Us</a></li>
-            <li><a>Contact</a></li>
-        </ul>
+    <div class="container">
+ <div class="container white z-depth-2">
+    <ul class="tabs teal">
+        <li class="tab col s3"><a class="white-text active" href="#login">login</a></li>
+        <li class="tab col s3"><a class="white-text" href="#register">register</a></li>
+    </ul>
+    <div id="login" class="col s12">
+        <form class="col s12">
+            <div class="form-container">
+                <h3 class="teal-text">Hello</h3>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" type="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <br>    
+                <center>
+                    <button class="btn waves-effect waves-light teal" type="submit" name="action">Connect</button>
+                    <br>
+                    <br>
+                    <a href="">Forgotten password?</a>
+                </center>
+            </div>
+        </form>
     </div>
-    <section class="hero is-normal is-fullheight">
-	<div class="hero-body">
-		<div class="accountForm">
-	    <div class="container has-text-centered">
-	        <div class="column is-4 is-offset-4">
-	            <h3 class="title has-text-grey">Get Started</h3>
-	            <p class="subtitle has-text-grey">Create an Account</p>
-	            <div class="box">
-	                <figure class="avatar">
-	                    <img src="https://placehold.it/128x128">
-	                </figure>
-	                <form>
-	                    <div class="field">
-	                        <div class="control">
-	                            <input class="input is-large" type="email" placeholder="Email" autofocus="">
-	                        </div>
-	                    </div>
-	                    <div class="field">
-	                        <div class="control">
-	                            <input class="input is-large" type="password" placeholder="Password">
-	                        </div>
-	                    </div>
-	                    <div>
-	                        <div class="field">
-	                            <div class="control">
-	                                <input class="input is-large" type="password" placeholder="Confirm Password">
-	                            </div>
-	                        </div>
-	                    </div>
-	                    <div class="control">
-	                        <label class="radio">
-	                            <input type="radio" name="answer"> Driver
-	                        </label>
-	                        <label class="radio">
-	                            <input type="radio" name="answer"> organization
-	                        </label>
-	                    </div>
-	                    <div class="field">
-	                        <label class="checkbox">
-	                            <input type="checkbox"> Remember me
-	                        </label>
-	                    </div>
-	                    <a class="button is-block is-info is-large">Sign Up</a>
-	                </form>
-	            </div>
-	            <p class="has-text-grey">
-	                Already a member? Click <a href="../">Here</a> to sign in &nbsp;
-	            </p>
-	            
-	            </div>
-	        </div>
-	    </div>
-	</div>
+    <div id="register" class="col s12">
+        <form class="col s12">
+            <div class="form-container">
+                <h3 class="teal-text">Welcome</h3>
+                <div class="row">
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate">
+                        <label for="last_name">First Name</label>
+                    </div>
+                    <div class="input-field col s6">
+                        <input id="last_name" type="text" class="validate">
+                        <label for="last_name">Last Name</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email" type="email" class="validate">
+                        <label for="email">Email</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="email-confirm" type="email" class="validate">
+                        <label for="email-confirm">Email Confirmation</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password" type="password" class="validate">
+                        <label for="password">Password</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12">
+                        <input id="password-confirm" type="password" class="validate">
+                        <label for="password-confirm">Password Confirmation</label>
+                    </div>
+                </div>
+                <center>
+                    <button class="btn waves-effect waves-light teal" type="submit" name="action">Submit</button>
+                </center>
+            </div>
+        </form>
+    </div>
+</div>
+</div>   
+        
+ 
 </body>
-
 </html>

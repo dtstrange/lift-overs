@@ -35,8 +35,8 @@ var Organization = sequelize.define('organization_tbl', {
     organization_description: {
         type: DataTypes.STRING
     },
-    organization_status_override: {
-        type: DataTypes.STRING
+    Organization_type: {
+        type:DataTypes.String
     }
 }, {
   timestamps: false

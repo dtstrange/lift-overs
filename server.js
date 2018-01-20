@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 //contoller for routes
-var routes = require("./controller/lift-overController.js");
+var routes = require("./routes");
 
 app.use("/", routes);
 
@@ -30,4 +30,4 @@ db.sequelize.sync({ force: true }).then(function() {
     app.listen(PORT, function() {
       console.log("App listening on PORT " + PORT);
     });
-  });
+});

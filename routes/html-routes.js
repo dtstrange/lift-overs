@@ -1,28 +1,34 @@
-var path = require("path");
+var db = require("../models");
+
+var dummyContent = [
+    {
+        Test: "dummy content text"
+    }
+  ];
 
 module.exports = function(app) {
     //path for main page
-    router.get("/", function(req, res){
-        res.render("index")
+    app.get("/", function(req, res){
+        res.render("index", dummyContent[0]);
     });
 
     //path for user page
-    router.get("/user", function(req, res){
-        res.render("user")
+    app.get("/user", function(req, res){
+        res.render("user", dummyContent[0])
     });
 
     //path for registration
-    router.get("/register/driver", function(req, res){
-        res.render("driver")
+    app.get("/register/driver", function(req, res){
+        res.render("driver", dummyContent[0])
     });
 
     //path for oganization info
-    router.get("/register/org", function(req, res){
-        res.render("org")
+    app.get("/register/org", function(req, res){
+        res.render("org", dummyContent[0])
     });
     //path for user settings
-    router.get("/user/settings", function(req, res){
-        res.render("settings")
+    app.get("/user/settings", function(req, res){
+        res.render("settings", dummyContent[0])
     });        
 
 

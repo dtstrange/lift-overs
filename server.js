@@ -1,6 +1,8 @@
 // requirements
 var express = require("express");
 var exphbs  = require('express-handlebars');
+var path = require("path");
+var methodOverride = require('method-override');
 //middleware
 var bodyParser = require('body-parser')
 //express setup
@@ -8,27 +10,29 @@ var app = express();
 var PORT = process.env.PORT || 3000;
 
 // Requiring our models for syncing
-var db = require("./models");
+var db = require(path.join(__dirname, '/models'));
 
-//static route for assets such as css and js
-app.use(express.static("public"));
+// Serve static content for the app from the 'public' directory
+//Static Route for assets such as css and js
+//The process.cwd() method returns the current working directory of the Node.js process.
+app.use(express.static(process.cwd() + '/public'));
 
-app.use(bodyParser.urlencoded({ extended: false }));
+// Override with POST having ?_method=PUT
+app.use(methodOverride('_method'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.text());
+app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 //handlebars setup
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 //contoller for routes
-var routes = require("./routes/html-routes.js");
-var driveApi = require("./driver-api-routes.js");
-var userApi = require("./user-api-routes.js");
-var orgApi = require("./orginazation-api-routes.js");
+var routes = require("./routes/html-routes.js")(app);
+var driveApi = require("./routes/driver-api-routes.js")(app);
+var userApi = require("./routes/user-api-routes.js")(app);
+var orgApi = require("./routes/orginazation-api-routes.js")(app);
 
-app.use("/", routes);
-app.use("/api/driver", driveApi);
-app.use("/api/user", userApi);
-app.use("/api/org", orgApi);
-
-//app.listen(PORT);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================

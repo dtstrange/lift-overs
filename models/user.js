@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes){
 
     // Create a "User" model
-    var User = sequelize.define('user_tbl', {
+    var User = sequelize.define('User', {
         user_id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -18,6 +18,9 @@ module.exports = function(sequelize, DataTypes){
             type: DataTypes.STRING
         },
         user_email: {
+            type: DataTypes.STRING
+        },
+        user_password: {
             type: DataTypes.STRING
         },
         user_type: {

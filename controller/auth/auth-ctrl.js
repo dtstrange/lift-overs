@@ -13,18 +13,18 @@ function generateJWT(user) {
     var expire = new Date();
     expire.setDate(expire.getDate()+7);
     return jwt.sign({
-        id: user.id,
-        first: user.firstName,
-        last: user.lastName,
-        email: user.email,
+        user_id: user.id,
+        user_first_name: user.firstName,
+        user_last_name: user.lastName,
+        user_email: user.email,
         exp: expire.getTime()/1000
     }, process.env.JWT_SECRET);
 }
 ctrl.login = function(req, res) {
     var email = req.body.email;
     var password = req.body.password;
-    models.User.findOne({where: {
-        email: email
+    models.user_tbl.findOne({where: {
+        user_email: email
     }})
     .then(function(resp) {
         if(resp) {
@@ -48,16 +48,17 @@ ctrl.login = function(req, res) {
     })
 };
 ctrl.register = function(req, res) {
+    console.log("hello")
     var user = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email.trim().toLowerCase(),
+        user_first_name: req.body.firstName,
+        user_first_name: req.body.lastName,
+        user_email: req.body.email.trim().toLowerCase(),
     }
     var salt = getSalt();
     var hash = getHash(req.body.password, salt);
     user.salt = salt;
     user.hash= hash;
-    models.User.create(user)
+    models.user_tbl.create(user)
     .then(function(resp) {
         res.json({success: true});
     })

@@ -14,4 +14,9 @@ module.exports = function(app) {
         res.render("user", dummyContent[0])
     });
 
+    //path for user settings
+    app.get("/user/settings", function(req, res){
+        res.render("settings", dummyContent[0])
+    });   
+
 };

@@ -1,4 +1,5 @@
 // requirements
+require("dotenv").config();
 var express = require("express");
 var exphbs  = require('express-handlebars');
 var path = require("path");
@@ -44,6 +45,16 @@ app.get("/", function(req, res){
   res.render("index", dummyContent[0]);
 });
 
+  //path for registration
+  app.get("/register/driver", function (req, res) {
+    res.render("driver", dummyContent[0])
+});
+
+//path for oganization info
+app.get("/register/org", function (req, res) {
+    res.render("org", dummyContent[0])
+});
+
 app.use("/auth", authRoutes);
 
 var auth = jwt({
@@ -61,9 +72,5 @@ app.use("/api/org", orgApi);
 db.sequelize.sync({ force: isDev }).then(function() {
     app.listen(PORT, function() {
       console.log("App listening on PORT " + PORT);
-    }).catch(function(err) {
-      console.error(err);
-      throw err;
-  });
-  
+    })
 });

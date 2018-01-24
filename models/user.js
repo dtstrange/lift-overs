@@ -18,11 +18,23 @@ module.exports = function(sequelize, DataTypes){
             type: DataTypes.STRING
         },
         user_email: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            unique: true,
+            require: true,
+            validate:{
+                isEmail: true
+            }
         },
         user_type: {
             type: DataTypes.STRING
+        },
+        salt: {
+            type: DataTypes.STRING
+        },
+        hash: {
+            type: DataTypes.STRING(1500)
         }
+
     }, {
       timestamps: false
     });

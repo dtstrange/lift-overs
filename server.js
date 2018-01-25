@@ -14,8 +14,7 @@ var db = require(path.join(__dirname, '/models'));
 
 // Serve static content for the app from the 'public' directory
 //Static Route for assets such as css and js
-//The process.cwd() method returns the current working directory of the Node.js process.
-app.use(express.static(process.cwd() + '/public'));
+app.use(express.static("public"));
 
 // Override with POST having ?_method=PUT
 app.use(methodOverride('_method'));

@@ -12,8 +12,10 @@ module.exports = function (app) {
     app.post("/api/user/create/",function (req, res) {
         db.User.create({
             user_first_name: req.body.first_name,
-            user_password: req.body.user_password,
-            user_type: req.body.user_type
+            user_last_name: req.body.last_name,
+            user_type: req.body.user_type,
+            user_email: req.body.user_email,
+            user_password: req.body.user_password
         }).then(function (dbUser) {
             res.json(dbUser);
         }).catch(function (err) {
@@ -30,7 +32,7 @@ module.exports = function (app) {
             user_last_name: req.body.last_name,
             user_phone: req.body.phone,
             user_email: req.body.email,
-            user_password: req.body.user_password,
+            user_password: req.body.password,
         },
             {
                 where: {

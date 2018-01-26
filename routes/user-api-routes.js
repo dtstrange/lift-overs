@@ -9,19 +9,32 @@ module.exports = function (app) {
         });
     });
 
-    app.post("/api/user/create/",function (req, res) {
-        db.User.create({
-            user_first_name: req.body.first_name,
-            user_last_name: req.body.last_name,
-            user_type: req.body.user_type,
-            user_email: req.body.user_email,
-            user_password: req.body.user_password
-        }).then(function (dbUser) {
-            res.json(dbUser);
-        }).catch(function (err) {
-            console.log(err);
-        
-        });
+    app.post("/api/user/create/", function(req, res) {
+        if (req.body.user_type === "Driver") {
+            console.log("Request :");
+            console.log(req.body);
+            db.User.create(req.body)
+                .then(function(dbUser) {
+                    console.log(dbUser);
+                    res.redirect("/user/driver");
+                })
+                .catch(function(err) {
+                    console.log(err);
+
+                });
+        } else {
+            console.log("Request :");
+            console.log(req.body);
+            db.User.create(req.body)
+                .then(function(dbUser) {
+                    console.log(dbUser);
+                    res.redirect("/user/org");
+                })
+                .catch(function(err) {
+                    console.log(err);
+
+                });
+        }
     });
 
 

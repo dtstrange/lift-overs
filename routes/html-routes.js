@@ -1,4 +1,5 @@
 var db = require("../models");
+// const fetch = require('node-fetch');
 
 module.exports = function(app) {
     //path for main page with registration
@@ -24,13 +25,15 @@ module.exports = function(app) {
         res.render("login", hbsObject);
     });
 
-    //path for driver landing page
-    app.get("/user/driver", function(req, res){
+    app.get("/user/driver/:id?", function(req, res){
+
         var hbsObject = {
             name: 1
         };
         res.render("driver", hbsObject);
     });
+
+
 
     //path for supplier landing page
     app.get("/user/supplier", function(req, res){
@@ -41,7 +44,7 @@ module.exports = function(app) {
     });
 
     //path for oganization landing page
-    app.get("/user/org", function(req, res){
+    app.get("/user/org/:id?", function(req, res){
         var hbsObject = {
             name: 1
         };

@@ -16,9 +16,9 @@ $(document).ready(function () {
                 axios({
                     method: "get",
                     url: "/user/driver",
-                    headers: {
-                        "Authorization": "Bearer " + localStorage.getItem("token")
-                    }
+                    // headers: {
+                    //     "Authorization": "Bearer " + localStorage.getItem("token")
+                    // }
                 })
                     .then(function (response) {
                         console.log(response);

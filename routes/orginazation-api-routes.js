@@ -1,8 +1,9 @@
 var db = require("../models");
+var express = require("express");
+var router = express.Router();
 
-module.exports = function(app){
     //route to find receive orginzations
-    app.get("/api/org/recieve", function(req, res){
+    router.get("/api/org/recieve", function(req, res){
         db.organization_id.findAll({
             where:{
                 type:req.body.recieve
@@ -14,7 +15,7 @@ module.exports = function(app){
         });
     });
     //route to find supplier orginzations
-    app.get("/api/org/supply", function(req, res){
+    router.get("/api/org/supply", function(req, res){
         db.organization_id.findAll({
             where:{
                 type:req.body.supply
@@ -26,7 +27,7 @@ module.exports = function(app){
         });
     });
     //route to get orginzation info
-    app.get("/api/org/:organization_id", function(req, res){
+    router.get("/api/org/:organization_id", function(req, res){
         db.organization.findAll({
             where:{
                 organization_id:req.body.organization_id
@@ -39,7 +40,7 @@ module.exports = function(app){
     });
     
     //route to create orginzation info
-    app.post("/api/org", function(req, res){
+    router.post("/api/org", function(req, res){
         db.organization.create({
             organization_name: req.body.organization_name,
             organization_street_address: req.body.organization_street_address,
@@ -59,7 +60,7 @@ module.exports = function(app){
     })
 
     //route to update orginzation info
-    app.put("/api/org/:orginzation_id", function(req, res){
+    router.put("/api/org/:orginzation_id", function(req, res){
         db.organization.update({organization_name: req.body.organization_name,
             organization_street_address: req.body.organization_street_address,
             organization_city: req.body.organization_city,
@@ -81,5 +82,6 @@ module.exports = function(app){
             console.log(err)
         });
     });
-};
+
+    module.exports = router;
 

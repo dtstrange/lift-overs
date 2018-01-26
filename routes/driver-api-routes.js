@@ -1,8 +1,9 @@
 var db = require("../models");
+var express = require("express");
+var router = express.Router();
 
-module.exports = function (app) {
     //route to get exisiting schedule
-    app.get("/api/driver/schedule/:driver_id", function (req, res) {
+    router.get("/api/driver/schedule/:driver_id", function (req, res) {
         db.Driver.findAll({
             where:
                 { driver_id: req.param.driver_id }
@@ -13,7 +14,7 @@ module.exports = function (app) {
         });
     });
     //route to create schedule times
-    app.post("/api/driver/schedule/:driver_id", function (req, res) {
+    router.post("/api/driver/schedule/:driver_id", function (req, res) {
         db.Driver.create({
             driver_monday: req.body.monday,
             driver_tuesday: req.body.tuesday,
@@ -34,7 +35,7 @@ module.exports = function (app) {
         });
     });
     //update sechulde time
-    app.put("/api/driver/schedule/:driver_id", function (req, res){
+    router.put("/api/driver/schedule/:driver_id", function (req, res){
         db.Driver.update({
             driver_monday: req.body.monday,
             driver_tuesday: req.body.tuesday,
@@ -55,5 +56,5 @@ module.exports = function (app) {
         });
     });
     
-};
 
+    module.exports = router;

@@ -3,11 +3,11 @@ require("dotenv").config();
 var express = require("express");
 var exphbs = require('express-handlebars');
 var path = require("path");
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
 
 //var morgan = require('morgan');
 var jwt = require("jsonwebtoken");
-//var unauthRoutes = require("./routes/unauth-routes.js");
+var unauthRoutes = require("./routes/unauth-html-routes.js")
 var authRoutes = require("./routes/auth-routes.js");
 var routes = require("./routes/html-routes.js");
 var driveApi = require("./routes/driver-api-routes.js");
@@ -43,26 +43,41 @@ app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 //contollers for routes
 
-//path for main page with registration
-app.get("/", function (req, res) {
-    var hbsObject = {
-        name: 1
-    };
-    res.render("index", hbsObject);
+app.use("/", unauthRoutes);
+
+app.post("/create/", function(req, res) {
+    if (req.body.user_type === "Driver") {
+        console.log("Request :");
+        console.log(req.body);
+        db.User.create(req.body)
+            .then(function(dbUser) {
+                console.log(dbUser);
+                res.redirect("/user/driver");
+            })
+            .catch(function(err) {
+                console.log(err);
+
+            });
+    } else {
+        console.log("Request :");
+        console.log(req.body);
+        db.User.create(req.body)
+            .then(function(dbUser) {
+                console.log(dbUser);
+                res.redirect("/user/org");
+            })
+            .catch(function(err) {
+                console.log(err);
+
+            });
+    }
 });
 
-//path for login page
-app.get("/login", function (req, res) {
-    var hbsObject = {
-        name: 1
-    };
-    res.render("login", hbsObject);
-});
 
-//app.use("/", unauthRoutes);
 app.use("/auth", authRoutes);
 
 var auth = function (req, res, next) {
+    console.log(`cookie: ${JSON.stringify(req.cookies)}`)
     try {
         console.log("COOKIE AUTH", req.get("Authorization"));
     

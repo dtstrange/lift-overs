@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes){
 
 // Create a "Driver" model
-var Driver = sequelize.define('driver_tbl', {
+var Driver = sequelize.define('Driver', {
     driver_id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,

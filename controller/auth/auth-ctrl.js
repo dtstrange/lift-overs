@@ -23,7 +23,7 @@ function generateJWT(user) {
 ctrl.login = function(req, res) {
     var email = req.body.email;
     var password = req.body.password;
-    models.user_tbl.findOne({where: {
+    models.User.findOne({where: {
         user_email: email
     }})
     .then(function(resp) {
@@ -58,7 +58,7 @@ ctrl.register = function(req, res) {
     var hash = getHash(req.body.password, salt);
     user.salt = salt;
     user.hash= hash;
-    models.user_tbl.create(user)
+    models.User.create(user)
     .then(function(resp) {
         res.json({success: true});
     })

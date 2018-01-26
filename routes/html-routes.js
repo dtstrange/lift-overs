@@ -1,22 +1,31 @@
 var db = require("../models");
+var express = require("express");
+var router = express.Router();
 
-var dummyContent = [
-    {
-        Test: "dummy content text"
-    }
-  ];
-
-module.exports = function(app) {
-    
-
-    //path for user page
-    app.get("/user", function(req, res){
-        res.render("user", dummyContent[0])
+    //path for driver landing page
+    router.get("/driver", function(req, res){
+        console.log("ey world")
+        var hbsObject = {
+            name: 1
+        };
+        res.render("driver", hbsObject);
     });
 
-    //path for user settings
-    app.get("/user/settings", function(req, res){
-        res.render("settings", dummyContent[0])
+    //path for supplier landing page
+    router.get("/org/supplier", function(req, res){
+        var hbsObject = {
+            name: 1
+        };
+        res.render("supplier", hbsObject);
+    });
+
+    //path for oganization landing page
+    router.get("/org", function(req, res){
+        var hbsObject = {
+            name: 1
+        };
+        res.render("org", hbsObject);
     });   
 
-};
+
+module.exports = router;

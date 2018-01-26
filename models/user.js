@@ -2,7 +2,7 @@
 module.exports = function(sequelize, DataTypes){
 
     // Create a "User" model
-    var User = sequelize.define('user_tbl', {
+    var User = sequelize.define('User', {
         user_id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -25,6 +25,9 @@ module.exports = function(sequelize, DataTypes){
                 isEmail: true
             }
         },
+        user_password: {
+            type: DataTypes.STRING
+        },
         user_type: {
             type: DataTypes.STRING
         },
@@ -38,6 +41,19 @@ module.exports = function(sequelize, DataTypes){
     }, {
       timestamps: false
     });
-        return User;
+    
+    User.associate = function(models){
+        User.hasMany(models.Organization, {
+            onDelete:"cascade"
+        })
+    };
+
+    User.associate = function(models){
+        User.hasMany(models.Driver, {
+            onDelete:"cascade"
+        })
+    };
+    
+    return User;
     
     }    

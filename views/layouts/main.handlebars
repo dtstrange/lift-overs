@@ -7,14 +7,62 @@
     <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
     <!-- Material icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.1/axios.min.js"></script>
 </head>
 
 <body>
-    {{{ body }}}
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/"><b>LiftOvers</b></a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbar2SupportedContent" aria-controls="navbar2SupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/driver">Drivers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/org">Organization</a>
+          </li>
+        </ul>
+        <a class="btn navbar-btn btn-primary ml-2 text-white" href="/register"><i class="fa d-inline fa-lg fa-user-plus"></i>Register</a>
+        <a class="btn navbar-btn btn-primary ml-2 text-white" href="/login"><i class="fa d-inline fa-lg fa-key"></i> Sign in</a>
+      </div>
+    </div>
+  </nav>
+  {{{body}}}
+  <div class="text-white bg-dark text-center align-self-baseline d-flex justify-content-between align-items-baseline py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-4 col-md-4 align-self-center">
+          <a href="#" target="_blank"><i class="fa fa-fw fa-facebook fa-3x text-white"></i></a>
+        </div>
+        <div class="col-4 col-md-4 align-self-center">
+          <a href="#" target="_blank"><i class="fa fa-fw fa-twitter fa-3x text-white"></i></a>
+        </div>
+        <div class="col-4 col-md-4 align-self-center">
+          <a href="#" target="_blank"><i class="fa fa-fw fa-instagram text-white fa-3x"></i></a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3 text-center">
+          <p>© Copyright 2017 LiftOvers</p>
+        </div>
+      </div>
+    </div>
+  </div>
+<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>  
+<script src="/assets/js/register.js"></script>
+<script src="/assets/js/driver-update.js"></script>
+<script src="/assets/js/org-update.js"></script>
+<script src="/assets/js/login.js"></script>
 </body>
 
 </html>

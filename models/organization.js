@@ -45,7 +45,7 @@ module.exports = function (sequelize, DataTypes) {
     Organization.associate = function (models) {
         Organization.belongsTo(models.User, {
             foreignKey: {
-                allowNull: false
+                allowNull: true
             }
         });
     };

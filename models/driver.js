@@ -39,7 +39,7 @@ var Driver = sequelize.define('Driver', {
 Driver.associate = function (models) {
     Driver.belongsTo(models.User, {
         foreignKey: {
-            allowNull: false
+            allowNull: true
         }
     });
 };

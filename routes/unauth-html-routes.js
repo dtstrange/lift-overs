@@ -17,5 +17,11 @@ router.get("/login", function (req, res) {
     };
     res.render("login", hbsObject);
 });
+router.get("/register", function(req, res){
+    var hbsObject = {
+        name: 1
+    };
+    res.render("register", hbsObject);
+});
 
 module.exports = router;

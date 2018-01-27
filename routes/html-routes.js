@@ -9,22 +9,9 @@ router.get("/", function(req, res){
     res.render("index", hbsObject);
 });
 
-router.get("/register", function(req, res){
-    var hbsObject = {
-        name: 1
-    };
-    res.render("register", hbsObject);
-});
 
-//path for login page
-router.get("/login", function(req, res){
-    var hbsObject = {
-        name: 1
-    };
-    res.render("login", hbsObject);
-});
 
-router.get("/user/driver/:id?", function(req, res){
+router.get("/driver/:id?", function(req, res){
 
     var hbsObject = {
         name: 1
@@ -44,7 +31,7 @@ router.get("/user/supplier", function(req, res){
 });
 
 //path for oganization landing page
-router.get("/user/org/:id?", function(req, res){
+router.get("/org/:id?", function(req, res){
     var hbsObject = {
         name: 1
     };

@@ -35,6 +35,14 @@ var Driver = sequelize.define('Driver', {
 }, {
   timestamps: false
 });
+
+Driver.associate = function (models) {
+    Driver.belongsTo(models.User, {
+        foreignKey: {
+            allowNull: false
+        }
+    });
+};
     return Driver;
 
 }

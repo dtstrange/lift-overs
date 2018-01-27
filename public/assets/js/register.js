@@ -1,31 +1,21 @@
-$(document).ready(function() {
-    $("#register-form").on("submit", function(event) {
-        event.preventDefault()
-        var userFirstName = $("#first_name").val().trim();
-        var userLastName = $("#last_name").val().trim();
-        var userType = $("#user_type").val().trim();
-        var userEmail = $("#user_email").val().trim();
-        var userPassword = $("#user_password").val().trim();
+$(document).ready(function () {
+    $("#register_submit").on("click", function (event) {
+        event.preventDefault();
+        var email = $("#login_email").val().trim();
+        var password = $("#login_password").val().trim();
+        var type = $('#login_type').find(":selected").text();
+        //console.log(email, password);
 
-        $.ajax({
-                method: "POST",
-                dataType: "json",
-                url: "/api/user/create",
-                data: {
-                    first_name: userFirstName,
-                    last_name: userLastName,
-                    user_type: userType,
-                    user_email: userEmail,
-                    user_password: userPassword
-                }
-            })
-            .done(function(user) {
-                console.log(user);
-                location.href = "/user/driver";
-            })
-            .fail(function(xhr, text, error) {
-                console.log(error);
-            });
-    })
+        axios.post("/auth/register", { email: email, password: password, user_type: type })
+            .then(function (response) {
+                console.log(response);
+                location.assign("/login");
 
-})
+            })
+            .catch(function(err) {
+                console.error(err);
+            })
+
+    });
+
+});

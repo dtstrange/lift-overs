@@ -13,7 +13,8 @@ function generateJWT(user) {
     var expire = new Date();
     expire.setDate(expire.getDate()+7);
     return jwt.sign({
-        user_id: user.id,
+        id: user.user_id,
+        type: user.user_type,
         user_first_name: user.firstName,
         user_last_name: user.lastName,
         user_email: user.email,
@@ -53,6 +54,7 @@ ctrl.register = function(req, res) {
         user_first_name: req.body.firstName,
         user_first_name: req.body.lastName,
         user_email: req.body.email.trim().toLowerCase(),
+        user_type: req.body.user_type || "driver"
     }
     var salt = getSalt();
     var hash = getHash(req.body.password, salt);
@@ -64,6 +66,7 @@ ctrl.register = function(req, res) {
     })
     .catch(function(err) {
         console.error(err);
+        return res.status(500).end('Registration FAILED' + err.toString());
         throw err;
     });
 };

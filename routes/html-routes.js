@@ -1,28 +1,28 @@
 var db = require("../models");
-var express = require("express");
+var express = require('express');
 var router = express.Router();
 
-router.get("/", function(req, res){
-    var hbsObject = {
-        name: 1
-    };
-    res.render("index", hbsObject);
-});
+// router.get("/", function(req, res){
+//     var hbsObject = {
+//         name: 1
+//     };
+//     res.render("index", hbsObject);
+// });
 
-router.get("/register", function(req, res){
-    var hbsObject = {
-        name: 1
-    };
-    res.render("register", hbsObject);
-});
+// router.get("/register", function(req, res){
+//     var hbsObject = {
+//         name: 1
+//     };
+//     res.render("register", hbsObject);
+// });
 
 //path for login page
-router.get("/login", function(req, res){
-    var hbsObject = {
-        name: 1
-    };
-    res.render("login", hbsObject);
-});
+// router.get("/login", function(req, res){
+//     var hbsObject = {
+//         name: 1
+//     };
+//     res.render("login", hbsObject);
+// });
 
 router.get("/user/driver/:id?", function(req, res){
 

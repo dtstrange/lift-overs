@@ -1,113 +1,104 @@
-// requirements
-require("dotenv").config();
-var express = require("express");
-var exphbs = require('express-handlebars');
-var path = require("path");
+var express = require('express');
+var path = require('path');
+var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-
-//var morgan = require('morgan');
-var jwt = require("jsonwebtoken");
-var unauthRoutes = require("./routes/unauth-html-routes.js")
-var authRoutes = require("./routes/auth-routes.js");
-var routes = require("./routes/html-routes.js");
-var driveApi = require("./routes/driver-api-routes.js");
-var userApi = require("./routes/user-api-routes.js");
-var orgApi = require("./routes/orginazation-api-routes.js");
-//middleware
 var bodyParser = require('body-parser');
-var dummyContent = [
-    {
-        Test: "dummy content text"
-    }
-];
-// set up logger
-//app.use(morgan('dev'));
-//express setup
+var expressValidator = require('express-validator');
+var Sequelize = require('sequelize');
+
+
+// Authentication
+var session = require('express-session');
+var passport = require('passport');
+// var SequelStore = require('sequelstore-connect')(session);
+
+
+var index = require('./routes/index');
+var users = require('./routes/users');
+
 var app = express();
 var PORT = process.env.PORT || 3000;
-var isDev = process.env.NODE_ENV === 'development';
 // Requiring our models for syncing
 var db = require(path.join(__dirname, '/models'));
 
-// Serve static content for the app from the 'public' directory
-//Static Route for assets such as css and js
-//The process.cwd() method returns the current working directory of the Node.js process.
-app.use(express.static(process.cwd() + '/public'));
-app.use(cookieParser())
+
+//allows us to use the credentials on .env
+require('dotenv').config();
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'hbs');
+
+// uncomment after placing your favicon in /public
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: "application/vnd.api+json" }));
-//handlebars setup
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
-//contollers for routes
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.use("/", unauthRoutes);
 
-app.post("/create/", function(req, res) {
-    if (req.body.user_type === "Driver") {
-        console.log("Request :");
-        console.log(req.body);
-        db.User.create(req.body)
-            .then(function(dbUser) {
-                console.log(dbUser);
-                res.redirect("/user/driver");
-            })
-            .catch(function(err) {
-                console.log(err);
+app.use(session({
+  secret: 'ixcxfghkyfsssgy',
+  resave: false,
+  // store: new SequelizeStore({database}),
+  saveUninitialized: false,
+  // cookie: { secure: true }
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
-            });
-    } else {
-        console.log("Request :");
-        console.log(req.body);
-        db.User.create(req.body)
-            .then(function(dbUser) {
-                console.log(dbUser);
-                res.redirect("/user/org");
-            })
-            .catch(function(err) {
-                console.log(err);
+app.use('/', index);
+app.use('/users', users);
 
-            });
-    }
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render('error');
 });
 
 
-app.use("/auth", authRoutes);
+// Handlebars default config
+const hbs = require('hbs');
+const fs = require('fs');
 
-var auth = function (req, res, next) {
-    console.log(`cookie: ${JSON.stringify(req.cookies)}`)
-    try {
-        console.log("COOKIE AUTH", req.get("Authorization"));
-    
-        var token = req.cookies.token || req.get("Authorization").split(" ")[1]
-        console.log(token);
-        try {
-            console.log("we trying")
-            jwt.verify(token, process.env.JWT_SECRET);
-            next();
-        } catch (err) {
-            console.log("we failin", err)
-            throw new Error("Not Authenticated");
-        }
-    } catch (err) {
-        console.log("something is really wrong", err)
-        throw new Error("Not Authenticated");
-    }
+const partialsDir = __dirname + '/views/partials';
 
-}
-app.use(auth);
-app.use("/user", routes);
-app.use("/api/user", userApi);
-app.use("/api/driver", driveApi);
-app.use("/api/org", orgApi);
+const filenames = fs.readdirSync(partialsDir);
 
-
-// Syncing our sequelize models and then starting our Express app
-// =============================================================
-db.sequelize.sync({ force: isDev }).then(function () {
-    app.listen(PORT, function () {
-        console.log("App listening on PORT " + PORT);
-    })
+filenames.forEach(function (filename) {
+  const matches = /^([^.]+).hbs$/.exec(filename);
+  if (!matches) {
+    return;
+  }
+  const name = matches[1];
+  const template = fs.readFileSync(partialsDir + '/' + filename, 'utf8');
+  hbs.registerPartial(name, template);
 });
+
+hbs.registerHelper('json', function(context) {
+    return JSON.stringify(context, null, 2);
+});
+
+db.sequelize.sync({ force: true }).then(function() {
+    app.listen(PORT, function() {
+      console.log("App listening on PORT " + PORT);
+    });
+});
+
+
+module.exports = app;

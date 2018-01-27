@@ -12,18 +12,31 @@ $(document).ready(function () {
                 document.cookie = "token=" + response.data.token;
                 localStorage.setItem("token", response.data.token)
 
-            }).then(function () {
+            }).then(function(){
                 axios({
                     method: "get",
-                    url: "/user/driver",
-                    // headers: {
-                    //     "Authorization": "Bearer " + localStorage.getItem("token")
-                    // }
+                    url: "/api/user/all",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
                 })
-                    .then(function (response) {
-                        console.log(response);
+                .then(function(userResponse){
+                    console.log(userResponse);
+                })
+            })
+            .then(function () {
+                axios({
+                    method: "get",
+                    url: "/user/driver/:id",
+                    headers: {
+                        "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                    // id:{id: }
+                })
+                    .then(function (userPageResponse) {
+                        console.log(userPageResponse);
                         var elem = document.getElementById("msg");
-                        elem.innerHTML = response.data;
+                        elem.innerHTML = userPageResponse.data;
                         var payload = JSON.parse(window.atob(localStorage.getItem("token").split('.')[1]));
                         console.log(payload)
                     })

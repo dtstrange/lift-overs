@@ -3,7 +3,8 @@ module.exports = function(sequelize, DataTypes){
 
     // Create a "User" model
     var User = sequelize.define('User', {
-        user_id: {
+        //user_id
+        id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true
@@ -17,16 +18,24 @@ module.exports = function(sequelize, DataTypes){
         user_phone: {
             type: DataTypes.STRING
         },
-        user_email: {
-            type: DataTypes.STRING,
+        //user_email
+        email: {
+            type: DataTypes.STRING(100),
             unique: true,
             require: true,
             validate:{
                 isEmail: true
             }
         },
-        user_password: {
-            type: DataTypes.STRING
+        //user_password
+        password: {
+            type: DataTypes.STRING(60),
+        },
+        //user_password
+        username: {
+            type: DataTypes.STRING(15),
+            unique: true,
+            require: true
         },
         user_type: {
             type: DataTypes.STRING
